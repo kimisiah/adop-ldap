@@ -39,7 +39,7 @@ This image enforces password policies for ldap users to include password ageing 
 
 * Minimum length: 9
 * Maximum length: no limit
-* Minimum number of lowercase characters: 1
+* Minimum number of lowercase characters: 6
 * Minimum number of uppercase characters: 1
 * Minimum number of digits: 1
 * Minimum number of punctuations: 1
