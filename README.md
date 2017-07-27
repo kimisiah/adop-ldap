@@ -1,6 +1,6 @@
 #Supported tags and respective Dockerfile links
 
-- [`0.1.0`, `0.1.0` (*0.1.0/Dockerfile*)](https://github.com/Accenture/adop-ldap/blob/master/Dockerfile.md)
+- [`0.2.0`, `0.2.0` (*0.2.0/Dockerfile*)](https://github.com/Accenture/adop-ldap/blob/0.2.0/Dockerfile)
 
 # What is adop-ldap?
 
@@ -39,7 +39,7 @@ This image enforces password policies for ldap users to include password ageing 
 
 * Minimum length: 9
 * Maximum length: no limit
-* Minimum number of lowercase characters: 1
+* Minimum number of lowercase characters: 6
 * Minimum number of uppercase characters: 1
 * Minimum number of digits: 1
 * Minimum number of punctuations: 1
