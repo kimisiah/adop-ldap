@@ -21,15 +21,21 @@ COPY resources/modules/ppolicy.ldif /etc/ldap.dist/modules/ppolicy.ldif
 COPY resources/configuration/check_password.conf /etc/ldap.dist/check_password.conf
 
 COPY resources/ldap_init.sh /usr/local/bin/
-RUN chmod u+x /usr/local/bin/ldap_init.sh
+RUN chmod u+x /usr/local/bin/ldap_init.sh && \
+    chgrp 0 /usr/local/bin/ldap_init.sh && \
+    chmod g+rwx /usr/local/bin/ldap_init.sh
 
 COPY resources/load_ldif.sh /usr/local/bin/
-RUN chmod u+x /usr/local/bin/load_ldif.sh
+RUN chmod u+x /usr/local/bin/load_ldif.sh && \
+    chgrp 0 /usr/local/bin/load_ldif.sh && \
+    chmod g+rwx /usr/local/bin/load_ldif.sh
 
 COPY resources/ldifs /var/tmp/ldifs
 
 COPY resources/entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod u+x /usr/local/bin/entrypoint.sh
+RUN chmod u+x /usr/local/bin/entrypoint.sh && \
+    chgrp 0 /usr/local/bin/entrypoint.sh && \
+    chmod g+rwx /usr/local/bin/entrypoint.sh
 
 # Install ldap utility commands
 RUN cp -a /etc/ldap.dist/* /etc/ldap && \
@@ -64,9 +70,9 @@ RUN wget -O /root/openldap-ppolicy-check-password-1.1.tar.gz https://github.com/
 # Cleanup
 RUN DEBIAN_FRONTEND=noninteractive apt-get remove -y wget gcc libdb-dev make && rm -rf /root/*
 
-RUN mkdir -p /var/lib/ldap /etc/ldap /var/tmp/ldap /var/run/slapd/ && \
-        chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp/ldap /var/run/slapd/ && \
-	chmod g+rwx /var/lib/ldap /etc/ldap /var/tmp/ldap /var/run/slapd/ 
+RUN mkdir -p /var/lib/ldap /etc/ldap /var/tmp/ldap /var/run/slapd/ /etc/ldap.dist && \
+        chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp/ldap /var/run/slapd/ /etc/ldap.dist && \
+	chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp/ldap /var/run/slapd/ /etc/ldap.dist 
 
 # Override entry point
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
