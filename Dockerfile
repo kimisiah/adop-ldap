@@ -65,7 +65,7 @@ RUN wget -O /root/openldap-ppolicy-check-password-1.1.tar.gz https://github.com/
 RUN DEBIAN_FRONTEND=noninteractive apt-get remove -y wget gcc libdb-dev make && rm -rf /root/*
 
 RUN mkdir -p /var/lib/ldap /etc/ldap /var/tmp/ldap /var/run/slapd/ && \
-        chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp/ldap /var/run/slapd/
+        chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp/ldap /var/run/slapd/ && \
 	chmod g+rwx /var/lib/ldap /etc/ldap /var/tmp/ldap /var/run/slapd/ 
 
 # Override entry point
