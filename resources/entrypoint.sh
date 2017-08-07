@@ -8,7 +8,7 @@
 ulimit -n 8192
 
 
-set -e
+#set -e
 
 SLAPD_LOAD_LDIFS="${SLAPD_LOAD_LDIFS},structure.ldif"
 
