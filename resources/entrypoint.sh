@@ -12,12 +12,12 @@ set -e
 
 SLAPD_LOAD_LDIFS="${SLAPD_LOAD_LDIFS},structure.ldif"
 
-set +x
+#set +x
 whoami
 ls -lrt /var/lib/ | grep ldap
 ls -lrt /var/run/ | grep slapd
 ls -lrt /etc/ | grep ldap
-set -x
+#set -x
 
 #chown -R openldap:openldap /var/lib/ldap/ /var/run/slapd/
 
