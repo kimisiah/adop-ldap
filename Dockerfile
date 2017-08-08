@@ -7,7 +7,7 @@ MAINTAINER Darren Jackson, <darren.a.jackson>
 
 ENV INITIAL_ADMIN_USER admin.user
 ENV INITIAL_ADMIN_PASSWORD="" GERRIT_PASSWORD="" JENKINS_PASSWORD=""
-ENV SLAPD_PASSWORD=""
+ENV SLAPD_PASSWORD="changeme"
 ENV SLAPD_DOMAIN ldap.example.com
 ENV SLAPD_FULL_DOMAIN "dc=ldap,dc=example,dc=com"
 ENV SLAPD_LDIF_BASE="/var/tmp/ldifs"
