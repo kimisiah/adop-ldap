@@ -66,7 +66,7 @@ EOF
 
     base_string="BASE ${dc_string:1}"
 
-	 cat /etc/ldap/ldap/conf | sed -i "s/^#BASE.*/${base_string}/g" > /etc/ldap/ldap/conf
+	 cat /etc/ldap/ldap.conf | sed -i "s/^#BASE.*/${base_string}/g" > /etc/ldap/ldap.conf
 #    sed -i "s/^#BASE.*/${base_string}/g" /etc/ldap/ldap.conf
 
     if [[ -n "$SLAPD_CONFIG_PASSWORD" ]]; then
@@ -75,7 +75,7 @@ EOF
         sed_safe_password_hash=${password_hash//\//\\\/}
 
         slapcat -n0 -F /etc/ldap/slapd.d -l /tmp/config.ldif
-		cat /tmp/config | sed -i "s/\(olcRootDN: cn=admin,cn=config\)/\1\nolcRootPW: ${sed_safe_password_hash}/g" > /tmp/config.ldif
+		cat /tmp/config.ldif | sed -i "s/\(olcRootDN: cn=admin,cn=config\)/\1\nolcRootPW: ${sed_safe_password_hash}/g" > /tmp/config.ldif
 #        sed -i "s/\(olcRootDN: cn=admin,cn=config\)/\1\nolcRootPW: ${sed_safe_password_hash}/g" /tmp/config.ldif
         rm -rf /etc/ldap/slapd.d/*
         slapadd -n0 -F /etc/ldap/slapd.d -l /tmp/config.ldif >/dev/null 2>&1
