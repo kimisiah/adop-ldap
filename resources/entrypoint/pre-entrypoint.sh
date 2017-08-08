@@ -66,7 +66,7 @@ EOF
 
     base_string="BASE ${dc_string:1}"
 
-	 cat /etc/ldap/ldap.conf | sed -i "s/^#BASE.*/${base_string}/g" > /etc/ldap/ldap.conf
+	 cat /etc/ldap/ldap.conf | sed "s/^#BASE.*/${base_string}/g" > /etc/ldap/ldap.conf
 #    sed -i "s/^#BASE.*/${base_string}/g" /etc/ldap/ldap.conf
 
     if [[ -n "$SLAPD_CONFIG_PASSWORD" ]]; then
@@ -75,7 +75,7 @@ EOF
         sed_safe_password_hash=${password_hash//\//\\\/}
 
         slapcat -n0 -F /etc/ldap/slapd.d -l /tmp/config.ldif
-		cat /tmp/config.ldif | sed -i "s/\(olcRootDN: cn=admin,cn=config\)/\1\nolcRootPW: ${sed_safe_password_hash}/g" > /tmp/config.ldif
+		cat /tmp/config.ldif | sed "s/\(olcRootDN: cn=admin,cn=config\)/\1\nolcRootPW: ${sed_safe_password_hash}/g" > /tmp/config.ldif
 #        sed -i "s/\(olcRootDN: cn=admin,cn=config\)/\1\nolcRootPW: ${sed_safe_password_hash}/g" /tmp/config.ldif
         rm -rf /etc/ldap/slapd.d/*
         slapadd -n0 -F /etc/ldap/slapd.d -l /tmp/config.ldif >/dev/null 2>&1
@@ -126,7 +126,7 @@ if [[ -n "$SLAPD_ADDITIONAL_MODULES" ]]; then
 			# Adds the structure, applies the default policy and modifies admin user policy
                         
 			SLAPD_LOAD_LDIFS="${SLAPD_LOAD_LDIFS},default-ppolicy.ldif,service-users.ldif"
-			cat $module_file | sed -i "s/\(olcPPolicyDefault: \)PPOLICY_DN/\1${SLAPD_PPOLICY_DN_PREFIX},${SLAPD_FULL_DOMAIN}/g" > $module_file
+			cat $module_file | sed "s/\(olcPPolicyDefault: \)PPOLICY_DN/\1${SLAPD_PPOLICY_DN_PREFIX},${SLAPD_FULL_DOMAIN}/g" > $module_file
 #			sed -i "s/\(olcPPolicyDefault: \)PPOLICY_DN/\1${SLAPD_PPOLICY_DN_PREFIX},${SLAPD_FULL_DOMAIN}/g" $module_file
 		 fi
 		 set +e
