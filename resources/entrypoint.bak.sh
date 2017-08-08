@@ -147,4 +147,4 @@ IFS=${OLD_IFS}
 # Run script to load configuration into ldap
 /usr/local/bin/ldap_init.sh ${SLAPD_LOAD_LDIFS#","}
 
-exec "$@"	
+exec "$@"

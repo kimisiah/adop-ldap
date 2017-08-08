@@ -141,10 +141,3 @@ if [[ -n "$SLAPD_ADDITIONAL_MODULES" ]]; then
 	done
 fi
 IFS=${OLD_IFS}
-
-#chown -R openldap:openldap /etc/ldap/slapd.d/
-
-# Run script to load configuration into ldap
-/usr/local/bin/ldap_init.sh ${SLAPD_LOAD_LDIFS#","}
-
-exec "$@"	

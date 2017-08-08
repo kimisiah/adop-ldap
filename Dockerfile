@@ -37,6 +37,10 @@ RUN chmod u+x /usr/local/bin/entrypoint.sh && \
     chgrp 0 /usr/local/bin/entrypoint.sh && \
     chmod g+rwx /usr/local/bin/entrypoint.sh
 
+COPY resources/entrypoint/pre-entrypoint.sh /usr/local/bin/pre-entrypoint.sh && \
+    chgrp 0 /usr/local/bin/pre-entrypoint.sh && \
+    chmod g+rwx /usr/local/bin/pre-entrypoint.sh
+	
 # Install ldap utility commands
 RUN cp -a /etc/ldap.dist/* /etc/ldap && \
 apt-get update && \
@@ -71,9 +75,14 @@ RUN wget -O /root/openldap-ppolicy-check-password-1.1.tar.gz https://github.com/
 RUN DEBIAN_FRONTEND=noninteractive apt-get remove -y wget gcc libdb-dev make && rm -rf /root/*
 
 RUN mkdir -p /var/lib/ldap /etc/ldap /var/tmp/ldap /var/tmp/ldifs /var/run/slapd/ /etc/ldap.dist && \
-        chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist && \
+    chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist && \
 	chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist 
 
+RUN /usr/local/bin/pre-entrypoint.sh
+	
+RUN chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist && \
+	chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist
+	
 # Override entry point
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["slapd", "-d", "32768", "-u", "openldap", "-g", "openldap"]
