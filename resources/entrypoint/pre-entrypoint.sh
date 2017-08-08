@@ -7,8 +7,6 @@
 # slapd is absurdly high. See https://github.com/docker/docker/issues/8231
 ulimit -n 8192
 
-echo "Reloading ldap static files..." && cp -rp /var/tmp/ldap-static/* /etc/ldap
-
 SLAPD_LOAD_LDIFS="${SLAPD_LOAD_LDIFS},structure.ldif"
 
 whoami
