@@ -81,7 +81,7 @@ RUN mkdir -p /var/lib/ldap /etc/ldap /var/tmp/ldap /var/tmp/ldifs /var/run/slapd
 
 RUN /usr/local/bin/pre-entrypoint.sh
 	
-RUN kill -TERM `cat /etc/ldap/slapd.pid`
+RUN kill -TERM `cat /etc/ldap/slapd.d/slapd.pid`
 	
 # Keep ldap-static files
 RUN mkdir -p /var/tmp/ldap-static && \
