@@ -81,6 +81,13 @@ RUN mkdir -p /var/lib/ldap /etc/ldap /var/tmp/ldap /var/tmp/ldifs /var/run/slapd
 
 RUN /usr/local/bin/pre-entrypoint.sh
 	
+# Keep ldap-static files
+RUN mkdir -p /var/tmp/ldap-static && \
+    chmod a+rwx /var/tmp/ldap-static && \
+    cp -rp /etc/ldap/* /var/tmp/ldap-static/ && \
+    chgrp -R 0 /var/tmp/ldap-static && \
+    chmod g+rwx -R /var/tmp/ldap-static
+	
 RUN chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist && \
 	chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist
 	
