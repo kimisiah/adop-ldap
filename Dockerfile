@@ -37,7 +37,8 @@ RUN chmod u+x /usr/local/bin/entrypoint.sh && \
     chgrp 0 /usr/local/bin/entrypoint.sh && \
     chmod g+rwx /usr/local/bin/entrypoint.sh
 
-COPY resources/entrypoint/pre-entrypoint.sh /usr/local/bin/pre-entrypoint.sh && \
+COPY resources/entrypoint/pre-entrypoint.sh /usr/local/bin/pre-entrypoint.sh
+RUN chmod u+x /usr/local/bin/pre-entrypoint.sh && \
     chgrp 0 /usr/local/bin/pre-entrypoint.sh && \
     chmod g+rwx /usr/local/bin/pre-entrypoint.sh
 	
