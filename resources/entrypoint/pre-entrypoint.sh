@@ -136,3 +136,6 @@ if [[ -n "$SLAPD_ADDITIONAL_MODULES" ]]; then
 	done
 fi
 IFS=${OLD_IFS}
+
+# Run script to load configuration into ldap
+/usr/local/bin/ldap_init.sh ${SLAPD_LOAD_LDIFS#","}
