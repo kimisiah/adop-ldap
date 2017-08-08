@@ -87,7 +87,7 @@ RUN /usr/local/bin/pre-entrypoint.sh
 # Keep ldap-static files
 RUN mkdir -p /var/tmp/ldap-static && \
     chmod a+rwx /var/tmp/ldap-static && \
-    cp -arp "/etc/ldap/"* "/var/tmp/ldap-static/" && \
+    cp -arp /etc/ldap/ /var/tmp/ldap-static/ && \
     chgrp -R 0 /var/tmp/ldap-static && \
     chmod g+rwx -R /var/tmp/ldap-static
 	
