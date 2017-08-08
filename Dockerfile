@@ -80,7 +80,8 @@ RUN mkdir -p /var/lib/ldap /etc/ldap /var/tmp/ldap /var/tmp/ldifs /var/run/slapd
 	chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist 
 
 RUN /usr/local/bin/pre-entrypoint.sh
-	
+
+## Kill slapd process
 RUN kill -TERM `cat /etc/ldap/slapd.d/slapd.pid`
 	
 # Keep ldap-static files
