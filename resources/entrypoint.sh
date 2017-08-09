@@ -20,7 +20,7 @@ ls -lrt /var/run/ | grep slapd
 ls -lrt /etc/ | grep ldap
 #set -x
 
-chown -R openldap:openldap /var/lib/ldap/ /var/run/slapd/
+chown -R openldap:0 /var/lib/ldap/ /var/run/slapd/
 
 SLAPD_FORCE_RECONFIGURE="${SLAPD_FORCE_RECONFIGURE:-false}"
 
@@ -143,9 +143,9 @@ if [[ -n "$SLAPD_ADDITIONAL_MODULES" ]]; then
 fi
 IFS=${OLD_IFS}
 
-chown -R openldap:openldap /etc/ldap/slapd.d/
+chown -R openldap:0 /etc/ldap/slapd.d/
 
 # Run script to load configuration into ldap
 /usr/local/bin/ldap_init.sh ${SLAPD_LOAD_LDIFS#","}
 
-exec "$@"	
+exec "$@"
