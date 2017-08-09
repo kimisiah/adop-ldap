@@ -77,7 +77,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get remove -y wget gcc libdb-dev make && 
 
 RUN mkdir -p /var/lib/ldap /etc/ldap /var/tmp/ldap /var/tmp/ldifs /var/run/slapd/ /etc/ldap.dist && \
     chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist && \
-	chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist 
+    chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist 
 
 RUN /usr/local/bin/pre-entrypoint.sh
 
@@ -92,7 +92,13 @@ RUN /usr/local/bin/pre-entrypoint.sh
 #    chmod g+rwx -R /var/tmp/ldap-static
 	
 RUN chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist && \
-	chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist
+    chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist
+
+# Create ownership via openldap
+RUN chown -R openldap:0 /var/lib/ldap /etc/ldap
+USER openldap
+RUN chmod ug+rwx -R /var/lib/ldap /etc/ldap
+USER root
 
 # Set OpenLDAP data and config directories in a data volume
 VOLUME ["/var/lib/ldap", "/etc/ldap"]
