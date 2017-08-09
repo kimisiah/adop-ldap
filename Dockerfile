@@ -82,7 +82,7 @@ RUN mkdir -p /var/lib/ldap /etc/ldap /var/tmp/ldap /var/tmp/ldifs /var/run/slapd
 #RUN /usr/local/bin/pre-entrypoint.sh
 	
 #RUN chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist && \
-    chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist
+#    chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist
 
 # Create ownership via openldap
 #RUN chown -R openldap:0 /var/lib/ldap /etc/ldap
