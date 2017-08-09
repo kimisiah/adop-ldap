@@ -95,7 +95,8 @@ RUN chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist &&
     chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist
 
 # Create ownership via openldap
-RUN chown -R openldap:0 /var/lib/ldap /etc/ldap
+RUN chown -R openldap:0 /var/lib/ldap /etc/ldap && \
+    chmod 777 /etc
 USER openldap
 RUN chmod ug+rwx -R /var/lib/ldap /etc/ldap
 USER root
