@@ -13,13 +13,6 @@ ulimit -n 8192
 
 SLAPD_LOAD_LDIFS="${SLAPD_LOAD_LDIFS},structure.ldif"
 
-#set +x
-whoami
-ls -lrt /var/lib/ | grep ldap
-ls -lrt /var/run/ | grep slapd
-ls -lrt /etc/ | grep ldap
-#set -x
-
 chown -R openldap:0 /var/lib/ldap/ /var/run/slapd/
 
 SLAPD_FORCE_RECONFIGURE="${SLAPD_FORCE_RECONFIGURE:-false}"
