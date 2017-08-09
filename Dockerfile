@@ -85,15 +85,18 @@ RUN /usr/local/bin/pre-entrypoint.sh
 ## RUN kill -TERM `cat /etc/ldap/slapd.d/slapd.pid`
 	
 # Keep ldap-static files
-RUN mkdir -p /var/tmp/ldap-static && \
-    chmod a+rwx /var/tmp/ldap-static && \
-    cp -arp /etc/ldap/ /var/tmp/ldap-static/ && \
-    chgrp -R 0 /var/tmp/ldap-static && \
-    chmod g+rwx -R /var/tmp/ldap-static
+#RUN mkdir -p /var/tmp/ldap-static && \
+#    chmod a+rwx /var/tmp/ldap-static && \
+#    cp -arp /etc/ldap/ /var/tmp/ldap-static/ && \
+#    chgrp -R 0 /var/tmp/ldap-static && \
+#    chmod g+rwx -R /var/tmp/ldap-static
 	
 RUN chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist && \
 	chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist
-	
+
+# Set OpenLDAP data and config directories in a data volume
+VOLUME ["/var/lib/ldap", "/etc/ldap"]
+
 # Override entry point
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["slapd", "-d", "32768", "-u", "openldap", "-g", "openldap"]
