@@ -95,11 +95,11 @@ RUN chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist &&
     chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist
 
 # Create ownership via openldap
-RUN chown -R openldap:0 /var/lib/ldap /etc/ldap && \
-    chmod 777 /etc /etc/ldap
-USER openldap
-RUN chmod ug+rwx -R /var/lib/ldap /etc/ldap
-USER root
+RUN chown -R openldap:0 /var/lib/ldap /etc/ldap
+
+# USER openldap
+# RUN chmod ug+rwx -R /var/lib/ldap /etc/ldap
+# USER root
 
 # Set OpenLDAP data and config directories in a data volume
 VOLUME ["/var/lib/ldap", "/etc/ldap"]
