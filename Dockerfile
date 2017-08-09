@@ -79,13 +79,13 @@ RUN mkdir -p /var/lib/ldap /etc/ldap /var/tmp/ldap /var/tmp/ldifs /var/run/slapd
     chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist && \
     chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist 
 
-RUN /usr/local/bin/pre-entrypoint.sh
+#RUN /usr/local/bin/pre-entrypoint.sh
 	
-RUN chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist && \
+#RUN chgrp -R 0 var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist && \
     chmod g+rwx -R /var/lib/ldap /etc/ldap /var/tmp /var/run/slapd/ /etc/ldap.dist
 
 # Create ownership via openldap
-RUN chown -R openldap:0 /var/lib/ldap /etc/ldap
+#RUN chown -R openldap:0 /var/lib/ldap /etc/ldap
 
 # Set OpenLDAP data and config directories in a data volume
 VOLUME ["/var/lib/ldap", "/etc/ldap"]
